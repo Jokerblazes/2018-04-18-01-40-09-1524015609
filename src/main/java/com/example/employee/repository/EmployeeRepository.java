@@ -1,5 +1,6 @@
 package com.example.employee.repository;
 
+import com.example.employee.entity.Company;
 import com.example.employee.entity.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,8 +24,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     //4.实现对Employee的分页查询，每页两个数据
     //5.查找**的所在的公司的公司名称
-
+    @Query(value = "select c from Employee e,Company c where e.company.id=c.id and e.name = :name")
+    public Company findCompanyByEmployeeName(@Param("name") String name);
     //6.将*的名字改成*,输出这次修改影响的行数
-
     //7.删除姓名是*的employee
 }
