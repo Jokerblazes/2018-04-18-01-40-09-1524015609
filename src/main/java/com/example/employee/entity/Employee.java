@@ -1,8 +1,8 @@
 package com.example.employee.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+
 @Entity
 public class Employee {
     @Id
@@ -13,7 +13,10 @@ public class Employee {
     private int age;
     private String gender;
     private int salary;
-    private long companyId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId")
+    private Company company;
 
     public Employee() {
     }
@@ -24,7 +27,8 @@ public class Employee {
         this.gender = gender;
         this.salary = salary;
         this.id = id;
-        this.companyId = companyId;
+        this.company = new Company();
+        company.setId(companyId);
     }
 
     public long getId() {
@@ -67,12 +71,12 @@ public class Employee {
         this.salary = salary;
     }
 
-    public long getCompanyId() {
-        return companyId;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyId(long companyId) {
-        this.companyId = companyId;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     @Override
@@ -83,7 +87,7 @@ public class Employee {
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", salary=" + salary +
-                ", companyId=" + companyId +
+                ", company=" + company +
                 '}';
     }
 }
