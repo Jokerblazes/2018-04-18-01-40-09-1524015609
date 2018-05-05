@@ -12,14 +12,14 @@ public class Company {
     @GeneratedValue
     private long id;
     private String companyName;
-    private int employeeNumber;
+    private int employeesNumber;
 
     @Override
     public String toString() {
         return "Company{" +
                 "id=" + id +
                 ", companyName='" + companyName + '\'' +
-                ", employeeNumber=" + employeeNumber +
+                ", employeeNumber=" + employeesNumber +
                 '}';
     }
 
@@ -39,11 +39,11 @@ public class Company {
         this.companyName = companyName;
     }
 
-    public int getEmployeeNumber() {
-        return employeeNumber;
+    public int getEmployeesNumber() {
+        return employeesNumber;
     }
 
-    public void setEmployeeNumber(int employeeNumber) {
-        this.employeeNumber = employeeNumber;
+    public void setEmployeesNumber(int employeesNumber) {
+        this.employeesNumber = employeesNumber;
     }
 }
