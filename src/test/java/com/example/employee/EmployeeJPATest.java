@@ -12,11 +12,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
@@ -32,7 +28,7 @@ public class EmployeeJPATest {
     public void setUp() throws Exception {
         //本地启动mysql，创建employee_db数据库
         Flyway flyway = new Flyway();
-        flyway.setDataSource("jdbc:mysql://localhost:3306/employee_db1","root","123456");
+        flyway.setDataSource("jdbc:mysql://localhost:3306/employee_db","root","root");
         flyway.clean();
         flyway.migrate();
     }
@@ -96,7 +92,7 @@ public class EmployeeJPATest {
     public void should_deleted_employee_when_given_employee_name() throws Exception {
         //7.删除姓名是xiaohong的employee
         Employee expectedEmployee = new Employee("xiaohong",19,"female",7000,1, 1);
-        Employee actualEmployee = null;
-        assertThat(actualEmployee).isNull();
+        Integer actualLine = employeeRepository.deleteEmployeesByName("xiaohong");
+        assertThat(actualLine).isEqualTo(1);
     }
 }
