@@ -5,6 +5,7 @@ import com.example.employee.entity.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -26,6 +27,13 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     //5.查找**的所在的公司的公司名称
     @Query(value = "select c from Employee e,Company c where e.company.id=c.id and e.name = :name")
     public Company findCompanyByEmployeeName(@Param("name") String name);
+
     //6.将*的名字改成*,输出这次修改影响的行数
+    @Modifying
+    @Query(value = "update Employee e set e.name = :name where e.name = :oldName")
+    public int updateEmployeeNameByName(@Param("oldName") String oldName,@Param("name") String name);
+
     //7.删除姓名是*的employee
+
+
 }
