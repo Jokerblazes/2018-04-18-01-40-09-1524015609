@@ -13,7 +13,7 @@ public class Employee {
     private int age;
     private String gender;
     private int salary;
-    private int companyId;
+    private long companyId;
 
     public Employee() {
     }
@@ -67,11 +67,11 @@ public class Employee {
         this.salary = salary;
     }
 
-    public int getCompanyId() {
+    public long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(long companyId) {
         this.companyId = companyId;
     }
 
