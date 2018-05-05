@@ -50,7 +50,9 @@ public class EmployeeJPATest {
     public void should_return_employee_given_character_in_name_and_salary_large_than() throws Exception {
         //2.找出Employee表中第一个姓名包含`n`字符的雇员所有个人信息
         Employee expectedEmployee = new Employee("xiaohong",19,"female",7000,1, 1);
-        String actualName = null;
+        Page<Employee> page = employeeRepository.findEmployeeByCharacterAndSalary("x", 6500, new PageRequest(0, 1));
+        assertThat(page.getSize()).isEqualTo(1);
+        String actualName = page.getContent().get(0).getName();
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
     }
 
