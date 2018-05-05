@@ -40,9 +40,9 @@ public class EmployeeJPATest {
     public void should_return_employee_when_input_employee_name() throws Exception {
         //1.查询名字是小红的employee
         Employee expectedEmployee = new Employee("xiaohong",19,"female",7000,1, 1);
-        Employee actualEmployee = employeeRepository.findEmployeeByName("xiaohong");
-        assertThat(actualEmployee).isNotNull();
-        String actualName = actualEmployee.getName();
+        Page<Employee> page = employeeRepository.findEmployeeByName("xiaohong", new PageRequest(0, 1));
+        assertThat(page.getSize()).isEqualTo(1);
+        String actualName = page.getContent().get(0).getName();
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
     }
 
