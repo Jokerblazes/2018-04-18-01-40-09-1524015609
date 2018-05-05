@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class Employee {
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     private String name;
     private int age;
@@ -15,7 +15,7 @@ public class Employee {
     private int salary;
     private int companyId;
 
-    public Employee(String name, int age, String gender, int salary, int id, int companyId) {
+    public Employee(String name, int age, String gender, int salary, long id, int companyId) {
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -24,11 +24,11 @@ public class Employee {
         this.companyId = companyId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
